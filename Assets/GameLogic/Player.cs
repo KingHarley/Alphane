@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        direction = Movement.GetDirection2D();
+        direction = Movement.GetDirectionForPlayer();
     }
 
     private void FixedUpdate()

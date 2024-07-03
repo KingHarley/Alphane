@@ -10,30 +10,9 @@ namespace GameLogic
 {
     internal static class Movement
     {
-        public static Vector3 CalculateNewPosition(Vector3 currentPosition, float speed)
+        public static Vector2 GetDirection2D()
         {
-
-            var distance = speed * Time.deltaTime;
-            var displacement = distance * GetDirectionUnitVector();
-            return currentPosition + displacement;
-        }
-
-        public static Vector3 GetDirectionUnitVector()
-        {
-            var allKeyVecs = new List<Vector3>();
-
-            if (Input.GetKey(KeyCode.W) || Input.GetKeyDown(KeyCode.W))
-                allKeyVecs.Add(Vector3.up);
-            if (Input.GetKey(KeyCode.S) || Input.GetKeyDown(KeyCode.S))
-                allKeyVecs.Add(Vector3.down);
-            if (Input.GetKey(KeyCode.D) || Input.GetKeyDown(KeyCode.D))
-                allKeyVecs.Add(Vector3.right);
-            if (Input.GetKey(KeyCode.A)  || Input.GetKeyDown(KeyCode.A))
-                allKeyVecs.Add(Vector3.left);
-
-            var seed = Vector3.zero;
-
-            return allKeyVecs.Aggregate(seed, (accum, vec) => accum + vec).normalized;
+            return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         }
     }
 }

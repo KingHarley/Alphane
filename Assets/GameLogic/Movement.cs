@@ -15,7 +15,10 @@ namespace GameLogic
             return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         }
 
-        public static Vector2 GetDirectionForEnemy(Vector3 enemyPos, Vector3 playerPos)
-            => (playerPos - enemyPos).normalized;
+        public static Vector2 GetDirectionBetweenVectors(Vector3 currentPos, Vector3 targetPos)
+            => (targetPos - currentPos).normalized;
+
+        public static float GetDistance(Vector3 pos1, Vector3 pos2)
+            => (pos1 - pos2).magnitude;
     }
 }

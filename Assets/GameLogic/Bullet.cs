@@ -29,14 +29,14 @@ namespace GameLogic
             if (go.tag == "Enemy")
             {
                 go.SendMessage("TakeDamage", stats.Damage);
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
 
         void CheckDistance()
         {
             if (Movement.GetDistance(transform.position, player.transform.position) > 100)
-                Destroy(this);
+                Destroy(gameObject);
         }
     }
 }

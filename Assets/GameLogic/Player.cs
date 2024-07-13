@@ -1,6 +1,7 @@
 using GameLogic;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -48,11 +49,23 @@ public class Player : MonoBehaviour
     void Shoot()
     {
         var bullet = Instantiate(PrefabBullet);
-        bullet.direction = Movement.GetDirectionBetweenVectors(transform.position, GameObject.FindGameObjectWithTag("Enemy").transform.position);
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var dir = enemies.Any() ? GetDirectionToClosestObject(gameObject, enemies) : Movement.GetRandomDirection();
+        bullet.direction = dir;
         bullet.player = this;
         bullet.transform.position = transform.position;
         IsReadyToShoot = false;
-        SecondsSinceLastShot = -1000;
+        SecondsSinceLastShot = 0;
+    }
+
+    Vector2 GetDirectionToClosestObject(GameObject currentObj, GameObject[] objects)
+    {
+        if (!objects.Any())
+            throw new System.Exception($"{nameof(GetDirectionToClosestObject)}: No objects thus there is no closest object");
+        var closestObj = objects
+            .OrderBy(go => Movement.GetDistance(go.transform.position, currentObj.transform.position))
+            .First();
+        return Movement.GetDirectionBetweenVectors(currentObj.transform.position, closestObj.transform.position);
     }
 
     void ProcessDeath()

@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     }
 
     void ProcessDeath()
-        => Destroy(this);
+        => Destroy(gameObject);
 
     private void OnTriggerEnter2D(Collider2D collision)
         => ProcessTriggerCollision(collision);

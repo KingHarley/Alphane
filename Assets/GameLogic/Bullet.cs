@@ -9,7 +9,7 @@ namespace GameLogic
     {
         public Player player;
         public Rigidbody2D rigidBody;
-        private float speed = 5;
+        public float speed = 10;
         public Stats stats;
         public Vector2 direction;
 

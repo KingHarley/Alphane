@@ -27,5 +27,8 @@ namespace GameLogic
         {
             return new Vector2(Random.NextFloat(-1, 1), Random.NextFloat(-1, 1)).normalized;
         }
+
+        public static Vector2 GetRandomPositionAtDistance(Vector2 reference, int distance)
+            => (GetRandomDirection() * distance) + reference;
     }
 }
